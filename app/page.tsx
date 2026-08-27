@@ -15,6 +15,7 @@ import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import AppointmentModal from "./components/AppointmentModal";
+import { IconCalendar, IconPhone } from "./components/icons";
 
 export default function Home() {
   const [bookingOpen, setBookingOpen] = useState(false);
@@ -22,7 +23,7 @@ export default function Home() {
   const closeBooking = () => setBookingOpen(false);
 
   return (
-    <div className="bg-aurora min-h-screen flex flex-col relative">
+    <div className="wayside-shell min-h-screen flex flex-col relative">
       <Navbar onBook={openBooking} />
       <main className="flex-1">
         <Hero onBook={openBooking} />
@@ -38,6 +39,10 @@ export default function Home() {
         <Contact onBook={openBooking} />
       </main>
       <Footer onBook={openBooking} />
+      <div className="mobile-dock" aria-label="Quick actions">
+        <a className="call" href="tel:+254700000000"><IconPhone className="w-4 h-4" /> Call</a>
+        <button className="book" onClick={openBooking}><IconCalendar className="w-4 h-4" /> Book</button>
+      </div>
       <AppointmentModal open={bookingOpen} onClose={closeBooking} />
     </div>
   );
