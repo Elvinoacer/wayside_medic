@@ -35,11 +35,7 @@ export default function Navbar({ onBook }: NavbarProps) {
     <>
       <header className="fixed top-0 inset-x-0 z-50 px-2.5 sm:px-4 lg:px-8 py-2.5 sm:py-3">
         <nav className={`wayside-nav mx-auto w-full max-w-6xl rounded-2xl sm:rounded-full px-2.5 sm:px-4 py-2.5 flex items-center gap-2 ${scrolled ? "is-scrolled" : ""}`}>
-          <a
-            href="#top"
-            className="flex items-center gap-2.5 flex-none min-w-0"
-            aria-label="Wayside Medical & Dental Clinic home"
-          >
+          <a href="#top" className="flex items-center gap-2.5 flex-none min-w-0" aria-label="Wayside Medical & Dental Clinic home">
             <IconLogo className="w-9 h-9 sm:w-10 sm:h-10 shrink-0" />
             <div className="leading-tight whitespace-nowrap">
               <div className="font-display font-extrabold text-[15px] sm:text-[16px] tracking-tight text-ink">Wayside</div>
@@ -59,12 +55,11 @@ export default function Navbar({ onBook }: NavbarProps) {
               <span>Call us</span>
             </a>
 
-            {/* On phones the fixed bottom dock already provides Call/Book actions.
-                Keeping the header to Brand + Menu prevents the controls from ever
-                squeezing the brand or being pushed outside the viewport. */}
+            {/* Header booking action is compact. The full-width booking button belongs
+                to the hero/mobile dock, never to the navigation bar. */}
             <button
               onClick={onBook}
-              className="wayside-primary hidden md:inline-flex shrink-0 !px-3 lg:!px-4 !py-2.5 text-xs lg:text-sm min-h-10 lg:min-h-11"
+              className="wayside-nav-book hidden md:inline-flex !w-auto !max-w-fit shrink-0 items-center justify-center gap-2 rounded-full !px-3.5 sm:!px-4 !py-2 text-xs sm:text-sm font-extrabold"
               aria-label="Book an appointment"
             >
               <IconCalendar className="w-4 h-4 shrink-0" />
