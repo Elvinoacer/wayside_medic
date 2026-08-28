@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { IconChevron, IconClipboard, IconArrowRight } from "./icons";
+import Reveal from "./Reveal";
 
 const FAQ_ITEMS = [
   {
@@ -46,8 +47,8 @@ export default function FAQ({ onBook }: FAQProps) {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="section relative">
-      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="section relative overflow-hidden">
+      <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 pb-28 sm:pb-16">
         <div className="text-center max-w-3xl mx-auto">
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-semibold text-teal-700 uppercase tracking-wider">
             <IconClipboard className="w-3.5 h-3.5" /> FAQ
@@ -62,65 +63,66 @@ export default function FAQ({ onBook }: FAQProps) {
           </p>
         </div>
 
-        <div className="mt-12 space-y-3">
+        <div className="mt-8 sm:mt-12 space-y-3">
           {FAQ_ITEMS.map((item, i) => {
             const open = openIdx === i;
             return (
-              <div
-                key={i}
-                className={`accordion-item glass-card rounded-2xl reveal ${
-                  open ? "glass-strong" : "glass"
-                }`}
-                data-open={open}
-                style={{ transitionDelay: `${i * 30}ms` }}
-              >
-                <button
-                  onClick={() => setOpenIdx(open ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 p-5 sm:p-6 text-left"
-                  aria-expanded={open}
+              <Reveal key={i} delay={i * 30}>
+                <div
+                  className={`accordion-item glass-card rounded-2xl ${
+                    open ? "glass-strong" : "glass"
+                  }`}
+                  data-open={open}
                 >
-                  <span className="font-display font-semibold text-ink text-base sm:text-lg leading-tight">
-                    {item.q}
-                  </span>
-                  <span className={`accordion-icon flex items-center justify-center w-8 h-8 rounded-full shrink-0 ${
-                    open ? "bg-teal-600 text-white" : "bg-teal-500/10 text-teal-700"
-                  }`}>
-                    <IconChevron className="w-4 h-4" />
-                  </span>
-                </button>
-                <div className="accordion-content">
-                  <div>
-                    <p className="px-5 sm:px-6 pb-5 sm:pb-6 text-sm sm:text-[15px] text-ink/70 leading-relaxed">
-                      {item.a}
-                    </p>
+                  <button
+                    onClick={() => setOpenIdx(open ? null : i)}
+                    className="w-full flex items-center justify-between gap-3 p-4 sm:p-6 text-left"
+                    aria-expanded={open}
+                  >
+                    <span className="font-display font-semibold text-ink text-[15px] sm:text-lg leading-snug">
+                      {item.q}
+                    </span>
+                    <span className={`accordion-icon flex items-center justify-center w-8 h-8 rounded-full shrink-0 ${
+                      open ? "bg-teal-600 text-white" : "bg-teal-500/10 text-teal-700"
+                    }`}>
+                      <IconChevron className="w-4 h-4" />
+                    </span>
+                  </button>
+                  <div className="accordion-content">
+                    <div>
+                      <p className="px-4 sm:px-6 pb-4 sm:pb-6 text-sm sm:text-[15px] text-ink/70 leading-relaxed">
+                        {item.a}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
 
-        {/* Still have questions */}
-        <div className="mt-10 glass-strong rounded-3xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center gap-5">
-          <div className="flex-1">
-            <h3 className="font-display font-bold text-ink text-lg leading-tight">
-              Still have a question?
-            </h3>
-            <p className="mt-1 text-sm text-ink/65 leading-relaxed">
-              Our reception team is happy to help in English or Swahili — call ahead or
-              book online and bring any existing records.
-            </p>
+        <Reveal delay={120}>
+          <div className="mt-8 sm:mt-10 glass-strong rounded-3xl p-5 sm:p-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-5 sm:gap-6">
+            <div className="flex-1 min-w-0">
+              <h3 className="font-display font-bold text-ink text-xl sm:text-lg leading-tight">
+                Still have a question?
+              </h3>
+              <p className="mt-2 text-sm sm:text-base text-ink/65 leading-relaxed max-w-2xl">
+                Our reception team is happy to help in English or Swahili — call ahead or
+                book online and bring any existing records.
+              </p>
+            </div>
+            <div className="flex w-full sm:w-auto flex-col min-[420px]:flex-row gap-3 shrink-0">
+              <a href="tel:+254700000000" className="btn-ghost w-full sm:w-auto justify-center min-h-14 px-5">
+                Call reception
+              </a>
+              <button onClick={onBook} className="btn-primary w-full sm:w-auto justify-center min-h-14 px-5">
+                Book a visit
+                <IconArrowRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
-          <div className="flex gap-3 shrink-0">
-            <a href="tel:+254700000000" className="btn-ghost">
-              Call reception
-            </a>
-            <button onClick={onBook} className="btn-primary">
-              Book a visit
-              <IconArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
