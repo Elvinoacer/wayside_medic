@@ -1,6 +1,7 @@
 "use client";
 
 import { IconShield, IconLock, IconDoc, IconCheck, IconClock } from "./icons";
+import Reveal from "./Reveal";
 
 const COMPLIANCE = [
   {
@@ -74,21 +75,19 @@ export default function Privacy() {
           <div className="lg:col-span-7">
             <div className="grid sm:grid-cols-3 gap-4 mb-5">
               {COMPLIANCE.map((c, i) => (
-                <article
-                  key={c.title}
-                  className="glass-card glass rounded-3xl p-5 reveal"
-                  style={{ transitionDelay: `${i * 80}ms` }}
-                >
-                  <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-teal-500/10 text-teal-700 mb-3">
-                    <c.icon className="w-5 h-5" />
-                  </div>
-                  <h3 className="font-display font-bold text-ink text-sm leading-tight">{c.title}</h3>
-                  <p className="mt-2 text-xs text-ink/65 leading-snug">{c.body}</p>
-                  <span className="mt-3 inline-flex items-center gap-1 px-2 py-1 rounded-full bg-teal-500/10 text-teal-700 text-[10px] font-semibold">
-                    <IconCheck className="w-2.5 h-2.5" />
-                    {c.chip}
-                  </span>
-                </article>
+                <Reveal key={c.title} delay={i * 80}>
+                  <article className="glass-card glass rounded-3xl p-5 h-full">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-teal-500/10 text-teal-700 mb-3">
+                      <c.icon className="w-5 h-5" />
+                    </div>
+                    <h3 className="font-display font-bold text-ink text-sm leading-tight">{c.title}</h3>
+                    <p className="mt-2 text-xs text-ink/65 leading-snug">{c.body}</p>
+                    <span className="mt-3 inline-flex items-center gap-1 px-2 py-1 rounded-full bg-teal-500/10 text-teal-700 text-[10px] font-semibold">
+                      <IconCheck className="w-2.5 h-2.5" />
+                      {c.chip}
+                    </span>
+                  </article>
+                </Reveal>
               ))}
             </div>
 
