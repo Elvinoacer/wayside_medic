@@ -69,9 +69,7 @@ export default function FAQ({ onBook }: FAQProps) {
             return (
               <Reveal key={i} delay={i * 30}>
                 <div
-                  className={`accordion-item glass-card rounded-2xl ${
-                    open ? "glass-strong" : "glass"
-                  }`}
+                  className={`accordion-item glass-card rounded-2xl ${open ? "glass-strong" : "glass"}`}
                   data-open={open}
                 >
                   <button
@@ -82,9 +80,7 @@ export default function FAQ({ onBook }: FAQProps) {
                     <span className="font-display font-semibold text-ink text-[15px] sm:text-lg leading-snug">
                       {item.q}
                     </span>
-                    <span className={`accordion-icon flex items-center justify-center w-8 h-8 rounded-full shrink-0 ${
-                      open ? "bg-teal-600 text-white" : "bg-teal-500/10 text-teal-700"
-                    }`}>
+                    <span className={`accordion-icon flex items-center justify-center w-8 h-8 rounded-full shrink-0 ${open ? "bg-teal-600 text-white" : "bg-teal-500/10 text-teal-700"}`}>
                       <IconChevron className="w-4 h-4" />
                     </span>
                   </button>
