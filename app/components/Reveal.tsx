@@ -1,26 +1,34 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode, type CSSProperties } from "react";
 
 interface RevealProps {
   children: ReactNode;
   className?: string;
   delay?: number;
+  /** Animation flavour: rise (default), slide from left/right, pop */
+  variant?: "up" | "left" | "right" | "pop";
+  as?: "div" | "section" | "li" | "article";
 }
 
 /**
  * Lightweight scroll-reveal wrapper using IntersectionObserver.
- * Adds the `is-visible` class to trigger CSS transitions on `.reveal` children
- * (or on the wrapper itself if you give it the `.reveal` class).
+ * Adds `is-visible` when the element enters the viewport.
+ * Automatically disabled under prefers-reduced-motion.
  */
-export default function Reveal({ children, className = "", delay = 0 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+export default function Reveal({
+  children,
+  className = "",
+  delay = 0,
+  variant = "up",
+  as: Tag = "div",
+}: RevealProps) {
+  const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    // Avoid running on reduced-motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       el.classList.add("is-visible");
       return;
@@ -42,9 +50,17 @@ export default function Reveal({ children, className = "", delay = 0 }: RevealPr
     return () => obs.disconnect();
   }, []);
 
+  const variantClass =
+    variant === "left" ? "rv-left" : variant === "right" ? "rv-right" : variant === "pop" ? "rv-pop" : "";
+
   return (
-    <div ref={ref} className={`reveal ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+    <Tag
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ref={ref as any}
+      className={`reveal ${variantClass} ${className}`}
+      style={{ transitionDelay: `${delay}ms` } as CSSProperties}
+    >
       {children}
-    </div>
+    </Tag>
   );
 }

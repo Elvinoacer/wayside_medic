@@ -287,6 +287,33 @@ export const IconInstagram = (p: IconProps) => (
   </svg>
 );
 
+export const IconArrowUpRight = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M7 17 17 7M9 7h8v8" />
+  </svg>
+);
+
+export const IconLanguage = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="m5 8 6 0M8 5v3m-2 7c3-1 5-4.5 5-7" />
+    <path d="m11 18 4-9 4 9M12.5 15h5" />
+  </svg>
+);
+
+export const IconPill = (p: IconProps) => (
+  <svg {...base(p)}>
+    <rect x="3" y="9" width="18" height="7" rx="3.5" transform="rotate(-40 12 12)" />
+    <path d="m9.5 7.5 5 5" />
+  </svg>
+);
+
+export const IconMap = (p: IconProps) => (
+  <svg {...base(p)}>
+    <path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z" />
+    <path d="M9 4v14M15 6v14" />
+  </svg>
+);
+
 export const IconLogo = (p: IconProps) => (
   <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none" {...p}>
     <rect width="32" height="32" rx="9" fill="url(#g)" />

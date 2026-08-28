@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import "./globals.css";
-import "./theme.css";
-import "./mobile-responsive.css";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -10,11 +8,12 @@ const inter = Inter({
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700", "800"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
@@ -74,9 +73,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jakarta.variable} h-full antialiased scroll-smooth`}
+      className={`${inter.variable} ${fraunces.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col bg-mist text-ink">{children}</body>
+      <body className="min-h-full flex flex-col bg-paper text-ink">{children}</body>
     </html>
   );
 }

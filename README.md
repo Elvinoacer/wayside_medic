@@ -4,32 +4,33 @@ A production-ready, mobile-first Next.js 16 website for **Wayside Medical & Dent
 Clinic**, a KMPDC-licensed Level 2 Private Practice Medical Clinic located on
 Kasarani-Mwiki Road in Sunton, Nairobi.
 
-Built with **Next.js 16 · React 19 · Tailwind CSS v4 · TypeScript**, featuring a custom
-glassmorphism design system, gradient-aurora background, scroll-reveal animations,
-interactive appointment booking modal, and a fully responsive mobile experience.
+Built with **Next.js 16 · React 19 · Tailwind CSS v4 · TypeScript**, featuring the
+**"Paper & Ink"** design system: a warm editorial look with solid surfaces, hard
+offset sticker shadows, hand-drawn accents, a scroll-driven visit journey and a
+live "Open now" clock. Zero glassmorphism.
 
-## Features
+## Design system — "Paper & Ink"
 
-- **Glassmorphic UI** — frosted-glass cards, gradient borders, animated blobs, dot/grid
-  pattern overlays.
-- **Mobile-first responsive** — every layout collapses cleanly to small screens; a
-  slide-in mobile drawer replaces the desktop nav.
-- **Interactive appointment modal** — multi-step booking flow with department, date,
-  time, contact details, DPA/Digital Health Act consent and animated confirmation.
-- **Comprehensive content** drawn from `research.md`:
-  - About / care philosophy & KMPDC licensing
-  - 6 departments (General OPD, Dental, OBGYN, Chest, Skin, Lab, Minor Surgery)
-  - Plain-language clinic glossary
-  - Pre-visit preparation protocols (lab, ANC, dental, every visit)
-  - Operating hours, capacity stats & emergency escalation
-  - Payments — M-Pesa, cash, Co-op Kwa Jirani, SHA / NHIF
-  - Triage (Red / Yellow / Green) + intake workflow + St. Francis referral partner
-  - Location, matatu routes (17B, 49), landmarks, peak-hour traffic note
-  - Data Privacy — DPA 2019, Digital Health Act, AES-256 / TLS 1.3, 20-year retention
-  - FAQ accordion
-  - Contact & emergency line
-- **Accessibility** — focus rings, `prefers-reduced-motion` support, semantic markup,
-  keyboard ESC to close modal, aria-labels on icon-only buttons.
+- **Warm paper base** (`#faf6ec`) with deep evergreen ink, leaf green, sun amber
+  and coral accents — all solid colour, no frosted glass, no blur.
+- **Sticker UI** — key cards and CTAs carry chunky 2px ink borders with hard
+  offset shadows that compress on press.
+- **Editorial type** — Fraunces (display serif, italic accents) + Inter (body).
+- **Less text, more demonstration** — content is shown, not narrated:
+  - Interactive **Care stage**: hover a department row and an animated card
+    demonstrates it (3D pointer tilt, icon + one line + 3 chips).
+  - **Sticky scroll journey**: "Your visit in four steps" pins a progress card
+    while steps light up as you scroll (replaces old Triage/Preparation walls).
+  - **Live hours**: an "Open now / Closed" pill computed from Africa/Nairobi
+    time, plus a week-view dot calendar.
+  - **Illustrated SVG map**: animated matatu routes 17B & 49 flow toward a
+    pulsing clinic pin (replaces paragraphs of transit text).
+  - **Marquee ticker** of departments, payment stickers, emergency card.
+- **Motion with restraint** — scroll progress bar, staggered reveals, parallax
+  hero doodles, spring pop-ins; everything honours `prefers-reduced-motion`.
+- **Accessibility** — skip link, focus-visible rings, semantic landmarks, aria
+  states on tabs/accordion/modal/dialogs, ESC to close, 44px+ touch targets,
+  AA-contrast palette.
 
 ## Tech Stack
 
@@ -38,7 +39,7 @@ interactive appointment booking modal, and a fully responsive mobile experience.
 - [Tailwind CSS v4](https://tailwindcss.com) (via `@tailwindcss/postcss`)
 - [TypeScript](https://www.typescriptlang.org)
 - Inline SVG icon library (no external icon dependency)
-- `next/font` (Inter + Plus Jakarta Sans)
+- `next/font` (Inter + Fraunces)
 
 ## Getting Started
 
@@ -53,41 +54,35 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```
 app/
-├── layout.tsx               # Root layout, fonts, SEO metadata
-├── page.tsx                  # Page composition (client)
-├── globals.css              # Design tokens, glassmorphism, animations
+├── layout.tsx               # Root layout, fonts (Fraunces + Inter), SEO metadata
+├── page.tsx                 # Page composition (client)
+├── globals.css              # "Paper & Ink" design tokens, primitives, motion
 └── components/
-    ├── icons.tsx             # Inline SVG icon library
-    ├── Navbar.tsx            # Sticky glass nav + mobile drawer
-    ├── Hero.tsx              # Hero with image, stats, marquee
-    ├── About.tsx             # Care philosophy + pillars
-    ├── Services.tsx          # 6 department cards + glossary
-    ├── Preparation.tsx       # Pre-visit protocols (sticky layout)
-    ├── Hours.tsx             # Schedule + capacity + emergency
-    ├── Payments.tsx          # 4 channels + SHA verification
-    ├── Triage.tsx            # Red/Yellow/Green + workflow + referral
-    ├── Location.tsx          # Map image + routes + landmarks
-    ├── Privacy.tsx           # DPA/DHA compliance + rights
-    ├── FAQ.tsx               # Accordion
-    ├── Contact.tsx           # Contact cards + emergency
-    ├── Footer.tsx            # Links + contact + social
-    ├── AppointmentModal.tsx  # Multi-step booking modal
-    └── Reveal.tsx            # IntersectionObserver scroll reveal
-public/                       # Static assets
+    ├── icons.tsx            # Inline SVG icon library
+    ├── Navbar.tsx           # Solid pill nav + scroll progress bar + drawer
+    ├── Hero.tsx             # Few words, one photo, parallax doodles, tilt card
+    ├── Ticker.tsx           # Department marquee
+    ├── Care.tsx             # Interactive department stage (replaces Services/About)
+    ├── VisitJourney.tsx     # Sticky scroll-driven 4-step visit story
+    ├── PlanVisit.tsx        # Live open-now clock, week dots, payments, emergency
+    ├── FindUs.tsx           # Animated SVG map + route chips (replaces Location)
+    ├── Faq.tsx              # 4-question accordion
+    ├── Footer.tsx           # Contact + privacy one-liner + socials
+    ├── AppointmentModal.tsx # Two-step booking modal, solid skin
+    └── Reveal.tsx           # IntersectionObserver scroll reveal
 research.md                   # Source research document
-next.config.ts                # Image remotePatterns for Unsplash
+next.config.ts                # Image remotePatterns
 ```
 
 ## Customisation
 
-- **Phone numbers** — currently placeholder `+254 700 000 000` (and `+254 741 689983` for
-  the St. Francis emergency line, which is real). Replace placeholders in
-  `Navbar.tsx`, `Hours.tsx`, `Triage.tsx`, `Contact.tsx`, `Footer.tsx`,
-  `AppointmentModal.tsx`.
-- **Images** — currently Unsplash URLs. Swap with your own photography by uploading into
-  `/public/images/` and updating the `<Image src=... />` paths.
-- **Address** — see `Location.tsx` and `Footer.tsx`.
-- **Email & social links** — see `Footer.tsx`.
+- **Phone numbers** — placeholder `+254 700 000 000` (St. Francis emergency line
+  `+254 741 689983` is real). Replace in `Navbar.tsx`, `PlanVisit.tsx`,
+  `FindUs.tsx` (none), `Footer.tsx`, `AppointmentModal.tsx`, `page.tsx`.
+- **Images** — currently Unsplash/z-cdn URLs in `Hero.tsx`. Swap with your own
+  photography in `/public/images/` and update the `<Image src=... />` paths.
+- **Address & directions link** — see `FindUs.tsx`.
+- **Hours** — `PlanVisit.tsx` (`OPEN_HOUR`, `CLOSE_HOUR`, week dots).
 
 ## License
 
