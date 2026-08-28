@@ -103,13 +103,14 @@ export default function Preparation() {
             </div>
           </div>
 
-          {/* Right — protocol grid */}
+          {/* Right — protocol grid. These cards must remain visible without relying on the
+              Reveal observer, because this section is also rendered directly on mobile. */}
           <div className="lg:col-span-8 grid sm:grid-cols-2 gap-5">
             {PROTOCOLS.map((p, i) => (
               <article
                 key={p.title}
-                className={`glass-card glass rounded-3xl p-6 reveal ${i % 2 === 1 ? "sm:mt-8" : ""}`}
-                style={{ transitionDelay: `${i * 80}ms` }}
+                className={`glass-card glass rounded-3xl p-6 animate-fade-up ${i % 2 === 1 ? "sm:mt-8" : ""}`}
+                style={{ animationDelay: `${i * 80}ms` }}
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className={`flex items-center justify-center w-11 h-11 rounded-2xl ${p.bg} ${p.color}`}>
