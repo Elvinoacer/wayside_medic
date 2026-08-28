@@ -56,18 +56,17 @@ const CONTACTS = [
 export default function Contact({ onBook }: ContactProps) {
   return (
     <section id="contact" className="section relative">
-      <div className="blob w-[30rem] h-[30rem] bg-teal-300/30 top-1/4 left-1/4" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="glass-card glass-strong rounded-[2.5rem] overflow-hidden">
+        <div className="relative rounded-[2.5rem] overflow-hidden bg-white/95 border border-white/80 shadow-[0_24px_60px_rgba(12,58,50,0.16)]">
           <div className="grid lg:grid-cols-12 gap-0">
             {/* Left — copy */}
             <div className="lg:col-span-5 p-7 sm:p-10 lg:p-12 bg-gradient-to-br from-teal-600 to-teal-700 text-white relative overflow-hidden">
-              {/* Decorative */}
-              <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-white/10 blur-2xl" />
-              <div className="absolute -bottom-16 -left-10 w-48 h-48 rounded-full bg-sky-400/20 blur-2xl" />
+              {/* Decorative — hidden on small screens to avoid mobile GPU compositing artifacts */}
+              <div className="hidden sm:block absolute -top-20 -right-20 w-60 h-60 rounded-full bg-white/10 blur-2xl" />
+              <div className="hidden sm:block absolute -bottom-16 -left-10 w-48 h-48 rounded-full bg-sky-400/20 blur-2xl" />
 
               <div className="relative">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur text-xs font-semibold uppercase tracking-wider">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-xs font-semibold uppercase tracking-wider">
                   <IconArrowRight className="w-3.5 h-3.5" /> Get in Touch
                 </span>
                 <h2 className="mt-4 font-display font-extrabold tracking-tight text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.1]">
@@ -80,7 +79,7 @@ export default function Contact({ onBook }: ContactProps) {
                 </p>
 
                 <div className="mt-8 space-y-3">
-                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/10 backdrop-blur">
+                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/10">
                     <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/15 shrink-0">
                       <IconClock className="w-5 h-5" />
                     </div>
@@ -89,7 +88,7 @@ export default function Contact({ onBook }: ContactProps) {
                       <div className="text-sm font-semibold">Mon–Sat · 8:00 AM – 6:00 PM</div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/10 backdrop-blur">
+                  <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/10">
                     <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-white/15 shrink-0">
                       <IconLocation className="w-5 h-5" />
                     </div>
@@ -107,8 +106,8 @@ export default function Contact({ onBook }: ContactProps) {
               </div>
             </div>
 
-            {/* Right — contact cards grid */}
-            <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12">
+            {/* Right — deliberately opaque cards for stable mobile rendering */}
+            <div className="lg:col-span-7 p-7 sm:p-10 lg:p-12 bg-white/80">
               <h3 className="font-display font-bold text-ink text-lg mb-5">
                 Reach us your way
               </h3>
@@ -117,7 +116,7 @@ export default function Contact({ onBook }: ContactProps) {
                   <a
                     key={c.title}
                     href={c.href}
-                    className="group glass-card glass rounded-2xl p-5 flex items-start gap-3.5 hover:bg-white/80 transition-colors"
+                    className="group rounded-2xl p-5 flex items-start gap-3.5 bg-white border border-teal-900/5 shadow-[0_8px_24px_rgba(12,58,50,0.08)] hover:-translate-y-1 hover:shadow-[0_16px_32px_rgba(12,58,50,0.12)] transition-all"
                   >
                     <div className={`flex items-center justify-center w-11 h-11 rounded-xl ${c.bg} ${c.accent} shrink-0`}>
                       <c.icon className="w-5 h-5" />
