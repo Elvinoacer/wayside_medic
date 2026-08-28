@@ -33,31 +33,31 @@ export default function Navbar({ onBook }: NavbarProps) {
 
   return (
     <>
-      <header className={`fixed top-0 inset-x-0 z-50 px-3 sm:px-5 lg:px-8 py-3 transition-all duration-300`}>
-        <nav className={`wayside-nav ${scrolled ? "is-scrolled" : ""} mx-auto max-w-6xl rounded-2xl sm:rounded-full px-3 sm:px-4 py-2.5 flex items-center justify-between gap-3`}>
-          <a href="#top" className="flex items-center gap-2.5 shrink-0 group" aria-label="Wayside Medical & Dental Clinic home">
-            <IconLogo className="w-9 h-9 group-hover:scale-105 transition-transform" />
-            <div className="leading-tight">
+      <header className="fixed top-0 inset-x-0 z-50 px-2.5 sm:px-4 lg:px-8 py-2.5 sm:py-3 transition-all duration-300">
+        <nav className={`wayside-nav mx-auto w-full max-w-6xl rounded-2xl sm:rounded-full px-3 sm:px-4 py-2.5 flex items-center justify-between gap-2 sm:gap-3 ${scrolled ? "is-scrolled" : ""}`}>
+          <a href="#top" className="flex items-center gap-2.5 min-w-0 shrink" aria-label="Wayside Medical & Dental Clinic home">
+            <IconLogo className="w-9 h-9 shrink-0" />
+            <div className="leading-tight min-w-0">
               <div className="font-display font-extrabold text-[15px] tracking-tight text-ink">Wayside</div>
-              <div className="text-[9px] uppercase tracking-[.16em] font-bold text-teal-700">Medical & Dental</div>
+              <div className="text-[9px] uppercase tracking-[.16em] font-bold text-teal-700 whitespace-nowrap">Medical & Dental</div>
             </div>
           </a>
 
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1 shrink-0">
             {NAV_LINKS.map((link) => (
               <a key={link.href} href={link.href} className="px-3.5 py-2 rounded-xl text-[13px] font-semibold text-ink/65 hover:text-teal-800 hover:bg-teal-50 transition-colors">{link.label}</a>
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
-            <a href="tel:+254700000000" className="hidden sm:flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-ink/75 hover:bg-teal-50 transition-colors">
+          <div className="flex items-center gap-2 shrink-0">
+            <a href="tel:+254700000000" className="hidden lg:flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-bold text-ink/75 hover:bg-teal-50 transition-colors">
               <IconPhone className="w-4 h-4 text-teal-700" />
-              <span className="hidden xl:inline">Call us</span>
+              <span>Call us</span>
             </a>
-            <button onClick={onBook} className="wayside-primary hidden sm:inline-flex !px-4 !py-2.5 text-xs" aria-label="Book an appointment">
+            <button onClick={onBook} className="wayside-primary hidden lg:inline-flex !px-4 !py-2.5 text-xs" aria-label="Book an appointment">
               <IconCalendar className="w-4 h-4" /> Book appointment
             </button>
-            <button aria-label="Open navigation menu" onClick={() => setOpen(true)} className="lg:hidden w-10 h-10 grid place-items-center rounded-xl bg-teal-50 text-teal-800 border border-teal-100">
+            <button aria-label="Open navigation menu" onClick={() => setOpen(true)} className="lg:hidden w-10 h-10 shrink-0 grid place-items-center rounded-xl bg-teal-50 text-teal-800 border border-teal-100">
               <IconMenu className="w-5 h-5" />
             </button>
           </div>
