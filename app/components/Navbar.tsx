@@ -33,10 +33,8 @@ export default function Navbar({ onBook }: NavbarProps) {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-50 px-2.5 sm:px-4 lg:px-8 py-2.5 sm:py-3 transition-all duration-300">
+      <header className="fixed top-0 inset-x-0 z-50 px-2.5 sm:px-4 lg:px-8 py-2.5 sm:py-3">
         <nav className={`wayside-nav mx-auto w-full max-w-6xl rounded-2xl sm:rounded-full px-2.5 sm:px-4 py-2.5 flex items-center gap-2 ${scrolled ? "is-scrolled" : ""}`}>
-          {/* Brand is deliberately non-shrinking: the name must never wrap into
-              "Wayi / de" just because the action controls need room. */}
           <a
             href="#top"
             className="flex items-center gap-2.5 flex-none min-w-0"
@@ -61,16 +59,16 @@ export default function Navbar({ onBook }: NavbarProps) {
               <span>Call us</span>
             </a>
 
-            {/* Keep a useful booking action visible on mobile, but shorten its
-                label on very narrow phones so the header can never overflow. */}
+            {/* On phones the fixed bottom dock already provides Call/Book actions.
+                Keeping the header to Brand + Menu prevents the controls from ever
+                squeezing the brand or being pushed outside the viewport. */}
             <button
               onClick={onBook}
-              className="wayside-primary shrink-0 !px-3 sm:!px-4 !py-2.5 text-xs sm:text-sm min-h-10 sm:min-h-11"
+              className="wayside-primary hidden md:inline-flex shrink-0 !px-3 lg:!px-4 !py-2.5 text-xs lg:text-sm min-h-10 lg:min-h-11"
               aria-label="Book an appointment"
             >
               <IconCalendar className="w-4 h-4 shrink-0" />
-              <span className="hidden min-[420px]:inline whitespace-nowrap">Book appointment</span>
-              <span className="min-[420px]:hidden">Book</span>
+              <span className="whitespace-nowrap">Book appointment</span>
             </button>
 
             <button
@@ -87,15 +85,15 @@ export default function Navbar({ onBook }: NavbarProps) {
       <div className={`fixed inset-0 z-[70] lg:hidden ${open ? "pointer-events-auto" : "pointer-events-none"}`} aria-hidden={!open}>
         <button aria-label="Close menu overlay" className={`absolute inset-0 bg-ink/35 backdrop-blur-sm transition-opacity ${open ? "opacity-100" : "opacity-0"}`} onClick={close} />
         <aside className={`absolute top-0 right-0 h-full w-[88%] max-w-sm bg-[#fbfaf7] shadow-2xl p-5 flex flex-col transition-transform duration-300 ${open ? "translate-x-0" : "translate-x-full"}`}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <IconLogo className="w-9 h-9" />
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <IconLogo className="w-9 h-9 shrink-0" />
               <div className="whitespace-nowrap">
                 <div className="font-display font-extrabold text-[15px]">Wayside</div>
                 <div className="text-[9px] tracking-[.16em] uppercase font-bold text-teal-700">Medical & Dental</div>
               </div>
             </div>
-            <button aria-label="Close navigation menu" onClick={close} className="w-10 h-10 grid place-items-center rounded-xl bg-white border border-ink/10"><IconClose className="w-5 h-5" /></button>
+            <button aria-label="Close navigation menu" onClick={close} className="w-10 h-10 shrink-0 grid place-items-center rounded-xl bg-white border border-ink/10"><IconClose className="w-5 h-5" /></button>
           </div>
           <div className="mt-8 rounded-2xl bg-teal-50 border border-teal-100 p-4">
             <p className="text-xs font-bold uppercase tracking-[.12em] text-teal-800">Here when you need us</p>
